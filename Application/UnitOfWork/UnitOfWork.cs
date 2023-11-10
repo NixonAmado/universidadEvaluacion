@@ -4,13 +4,21 @@ using Persistence;
 
 namespace Application.UnitOfWork;
 
-public class UnitOfWork : IUnitOfWork, IDisposable
+public class UnitOfWork : IDisposable
 {
-    private readonly SkelettonContext _context;
+    private readonly UniversityContext _context;
     private IRol _roles;
     private IUser _users;
     private IUserRol _userole;
-    public UnitOfWork(SkelettonContext context)
+    private IAsignatura _asignaturas; 
+    private ICursoEscolar _cursosEscolares; 
+    private IDepartamento _departamentos; 
+    private IGrado _grados; 
+    private IPersona _personas; 
+    private ITipoAsignatura _tipoAsignaturas; 
+    private IProfesor _profesores; 
+
+    public UnitOfWork(UniversityContext context)
     {
         _context = context;
     }
@@ -48,6 +56,34 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             return _users;
         }
     }
+
+    IAsignatura Asignaturas 
+    {
+        get
+        {
+            if (_asignaturas == null)
+            {
+                _asignaturas = new AsignaturaRepository(_context);
+            }
+            return _asignaturas;
+        }
+     }
+    ICursoEscolar CursosEscolares { 
+        get
+        {
+            if (_cursosEscolares == null)
+            {
+                _cursosEscolares = new CursoEscolarRepository(_context);
+            }
+            return _cursosEscolares;
+        }
+     }
+    IDepartamento Departamentos { get; }
+    IGrado Grados { get; }
+    IPersona Personas { get; }
+    ITipoAsignatura TiposAsignaturas { get; }
+    IProfesor Profesores { get; }
+    
     public async Task<int> SaveAsync()
     {
         return await _context.SaveChangesAsync();

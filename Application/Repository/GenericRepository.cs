@@ -6,11 +6,11 @@ using Persistence;
 
 namespace Application.Repository;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    private readonly SkelettonContext _context;
+    private readonly UniversityContext _context;
 
-    public GenericRepository(SkelettonContext context)
+    public GenericRepository(UniversityContext context)
     {
         _context = context;
     }

@@ -3,11 +3,11 @@ using Domain.Interfaces;
 using Persistence;
 
 namespace Application.Repository;
-public class UseRolRepository : GenericRepository<UserRol>, IUserRol
+public class DepartamentoRepository : GenericRepository<Departamento>, IDepartamento
 {
     private readonly UniversityContext _context;
 
-    public UseRolRepository(UniversityContext context) : base(context)
+    public DepartamentoRepository(UniversityContext context) : base(context)
     {
         _context = context;
     }

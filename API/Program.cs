@@ -29,7 +29,7 @@ builder.Services.ConfigureApiVersioning();
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 builder.Services.ConfigureCors();
 builder.Services.AddJwt(builder.Configuration);
-builder.Services.AddDbContext<SkelettonContext>(options => 
+builder.Services.AddDbContext<UniversityContext>(options => 
 {
     string connectionString = builder.Configuration.GetConnectionString("ConexMysql");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));

@@ -7,9 +7,9 @@ namespace Application.Repository;
 
 public class UserRepository : GenericRepository<User>, IUser
 {
-    private readonly SkelettonContext _context;
+    private readonly UniversityContext _context;
 
-    public UserRepository(SkelettonContext context) : base(context)
+    public UserRepository(UniversityContext context) : base(context)
     {
         _context = context;
     }
