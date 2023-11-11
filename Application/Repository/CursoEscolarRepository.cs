@@ -11,4 +11,6 @@ public class CursoEscolarRepository : GenericRepository<CursoEscolar>, ICursoEsc
     {
         _context = context;
     }
+
+
 }

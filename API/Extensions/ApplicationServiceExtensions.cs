@@ -15,6 +15,13 @@ namespace API.Extension;
 
 public static class ApplicationServiceExtensions
 {
+    public static void ConfigureJson(this IServiceCollection services)
+    {
+        services.AddControllersWithViews()
+        .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
+    }
     public static void ConfigureCors(this IServiceCollection services) =>
         services.AddCors(options =>
         {

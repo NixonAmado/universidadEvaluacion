@@ -12,6 +12,7 @@ public class UniversityContext : DbContext
     public DbSet<Rol> Roles { get; set; }
     public DbSet<UserRol> UserRoles { get; set; }
     public DbSet<Persona> Personas { get; set; }
+    public DbSet<Persona> Alumnos {get;set;}
     public DbSet<Profesor> Profesores { get; set; }
     public DbSet<Departamento> Departamentos { get; set; }
     public DbSet<Grado> Grados { get; set; }

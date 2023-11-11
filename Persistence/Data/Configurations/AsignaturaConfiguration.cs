@@ -19,16 +19,14 @@ public class AsignaturaConfiguration : IEntityTypeConfiguration<Asignatura>
                     .IsRequired();
 
         builder.Property(p => p.Curso)
-                    .HasColumnType("TINYINT")
-                    .IsRequired();  
+                    .HasColumnType("TINYINT");
+
 
         builder.Property(p => p.Cuatrimestre)
                     .HasColumnType("TINYINT")
                     .IsRequired();     
 
-        builder.HasOne(p => p.TipoAsignatura)
-                    .WithMany(p => p.Asignaturas)
-                    .HasForeignKey(p => p.Id_TipoAsignatura);
+
         
         builder.HasOne(p => p.Profesor)
                     .WithMany(p => p.Asignaturas)
@@ -37,6 +35,91 @@ public class AsignaturaConfiguration : IEntityTypeConfiguration<Asignatura>
         builder.HasOne(p => p.Grado)
                     .WithMany(p => p.Asignaturas)
                     .HasForeignKey(p => p.Id_Grado);
-
+        
+        builder.Property(e => e.Tipo)
+                    .HasColumnName("tipo")
+                    .IsRequired()
+                    .HasAnnotation("EnumDisplayFormat", "{0}")
+                    .HasMaxLength(15)
+                    .HasConversion<string>()
+                    .IsUnicode(false);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

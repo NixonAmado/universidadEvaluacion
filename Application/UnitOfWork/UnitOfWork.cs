@@ -4,7 +4,7 @@ using Persistence;
 
 namespace Application.UnitOfWork;
 
-public class UnitOfWork : IDisposable
+public class UnitOfWork : IUnitOfWork, IDisposable
 {
     private readonly UniversityContext _context;
     private IRol _roles;
@@ -57,7 +57,7 @@ public class UnitOfWork : IDisposable
         }
     }
 
-    IAsignatura Asignaturas 
+    public IAsignatura Asignaturas 
     {
         get
         {
@@ -68,7 +68,7 @@ public class UnitOfWork : IDisposable
             return _asignaturas;
         }
      }
-    ICursoEscolar CursosEscolares { 
+    public ICursoEscolar CursosEscolares { 
         get
         {
             if (_cursosEscolares == null)
@@ -78,11 +78,62 @@ public class UnitOfWork : IDisposable
             return _cursosEscolares;
         }
      }
-    IDepartamento Departamentos { get; }
-    IGrado Grados { get; }
-    IPersona Personas { get; }
-    ITipoAsignatura TiposAsignaturas { get; }
-    IProfesor Profesores { get; }
+    public IDepartamento Departamentos { 
+        get
+        {
+            if (_departamentos == null)
+            {
+                _departamentos = new DepartamentoRepository(_context);
+            }
+            return _departamentos;
+        }
+     
+     }
+    public IGrado Grados { 
+        get
+        {
+            if (_grados == null)
+            {
+                _grados = new GradoRepository(_context);
+            }
+            return _grados;
+        }
+     
+     }
+    public IPersona Personas { 
+        get
+        {
+            if (_personas == null)
+            {
+                _personas = new PersonaRepository(_context);
+            }
+            return _personas;
+        }
+             
+
+     }
+    public ITipoAsignatura TiposAsignaturas {
+        get
+        {
+            if (_tipoAsignaturas == null)
+            {
+                _tipoAsignaturas = new TipoAsignaturaRepository(_context);
+            }
+            return _tipoAsignaturas;
+        }
+     
+     }
+    public IProfesor Profesores {
+        get
+        {
+            if (_profesores == null)
+            {
+                _profesores = new ProfesorRepository(_context);
+            }
+            return _profesores;
+        }
+     
+    }
     
     public async Task<int> SaveAsync()
     {

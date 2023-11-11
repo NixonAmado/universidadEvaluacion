@@ -34,18 +34,28 @@ public class PersonaConfiguration : IEntityTypeConfiguration<Persona>
                     .IsRequired();
 
         builder.Property(p => p.Telefono)
-                    .HasColumnType("varchar(9)")
-                    .IsRequired();
+                    .HasColumnType("varchar(9)");
+
 
         builder.Property(p => p.Fecha_nacimiento)
                     .HasColumnType("Date")
                     .IsRequired();
         
-        builder.Property(p => p.Sexo)
-                    .IsRequired();
+        builder.Property(e => e.Sexo)
+                .HasColumnName("sexo")
+                .IsRequired()
+                .HasAnnotation("EnumDisplayFormat", "{0}")
+                .HasMaxLength(15)
+                .HasConversion<string>()
+                .IsUnicode(false);
                 
         builder.Property(p => p.Tipo)
-                    .IsRequired();        
-                    
+                .HasColumnName("tipo")
+                .IsRequired()
+                .HasAnnotation("EnumDisplayFormat", "{0}")
+                .HasMaxLength(15)
+                .HasConversion<string>()
+                .IsUnicode(false);
+                
     }
 }
