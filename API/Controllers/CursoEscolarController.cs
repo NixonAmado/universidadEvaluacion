@@ -19,7 +19,16 @@ public class CursoEscolarController : ApiBaseController
         _mapper = mapper;
         _unitOfWork = unitOfWork;
     }
-    
+
+    [HttpGet("PointVeintiCuatro")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> PointVeintiCinco()
+    {
+        var cursosEscolares = await _unitOfWork.CursosEscolares.GetCantAlumnosMatrEnCurso();
+        return Ok(cursosEscolares);
+    }
+
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

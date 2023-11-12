@@ -46,7 +46,14 @@ public class AsignaturaController : ApiBaseController
         var asignaturas = await _unitOfWork.Asignaturas.GetAsignaturasSinProfesor();
         return _mapper.Map<List<BsAsignaturaDto>>(asignaturas);
     }
-
+    [HttpGet("PointTreinta")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<BsAsignaturaDto>>> PointTreinta()
+    {
+        var asignaturas = await _unitOfWork.Asignaturas.GetAsignaturaSinProfesor();
+        return _mapper.Map<List<BsAsignaturaDto>>(asignaturas);
+    }
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -71,8 +71,35 @@ public class ProfesorRepository : GenericRepository<Profesor>, IProfesor
     }
     
 
+    //25. Devuelve un listado con el número de asignaturas que imparte cada profesor. El listado debe tener en cuenta aquellos profesores que no imparten ninguna asignatura. El resultado mostrará cinco columnas: id, nombre, primer apellido, segundo apellido y número de asignaturas. El resultado estará ordenado de mayor a menor por el número de asignaturas.
 
-
+    public async Task<IEnumerable<Object>> GetProfesorConAsignaturas()
+    {
+        return await _context.Profesores
+                            .Select(p => new 
+                            {
+                                id = p.Id_profesor,
+                                primerApellido = p.Persona.Apellido1,
+                                SegundoApellido = p.Persona.Apellido2,
+                                numeroAsignaturas = p.Asignaturas.Count()
+                            }).OrderByDescending(p => p.numeroAsignaturas).ToListAsync();
+    }
+    
+    //27. Devuelve un listado con los profesores que no están asociados a un departamento.
+    public async Task<IEnumerable<Profesor>> GetAllProfesoresNoVinculados()
+    {
+        return await _context.Profesores
+                            .Where(p => p.Departamento == null).ToListAsync();
+    }
+    //29. Devuelve un listado con los profesores que tienen un departamento asociado y que no imparten ninguna asignatura.
+    public async Task<IEnumerable<Profesor>> GetProfesoresDepartamentoSinAsig()
+    {
+        return await _context.Profesores
+                            .Include(p => p.Departamento)
+                            .Include(p =>p.Persona)
+                            .Where(p => p.Id_departamento == p.Departamento.Id && !p.Asignaturas.Any()).ToListAsync();
+    }
+    
 
 
 }

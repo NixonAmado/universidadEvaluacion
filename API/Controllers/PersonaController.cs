@@ -76,6 +76,32 @@ public class PersonaController : ApiBaseController
         var Alumnos = await _unitOfWork.Personas.GetAlumnosMatriculados();
         return _mapper.Map<List<BsPersonaDto>>(Alumnos);
     }
+    [HttpGet("PointDiezSiete")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<Object>>> PointDiezSiete()
+    {
+        var Alumnas = await _unitOfWork.Personas.GetCantAlumnas();
+        return Ok(Alumnas);
+    }
+    [HttpGet("PointDiezOcho/{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<Object> PointDiezOcho(int year)
+    {
+        var Alumnas = await _unitOfWork.Personas.GetCantAlumnosEnFecha(year);
+        return Ok(Alumnas);
+    }
+    [HttpGet("PointVeintiSeis")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<BsPersonaDto> PointVeintiSeis()
+    {
+        var Alumnos = await _unitOfWork.Personas.GetAlumnoMasJoven();
+        return _mapper.Map<BsPersonaDto>(Alumnos);
+    }
+        
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]

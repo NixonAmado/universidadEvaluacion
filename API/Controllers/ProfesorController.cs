@@ -65,7 +65,35 @@ public class ProfesorController : ApiBaseController
         var profesores = await _unitOfWork.Profesores.GetProfesoresNoAsignatura();
         return _mapper.Map<List<DepartamentoProfesorDto>>(profesores);
     }
+    [HttpGet("PointVeintiCinco")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
+    public async Task<ActionResult<IEnumerable<DepartamentoProfesorDto>>> GetPointVeintiCienco()
+    {
+        var profesores = await _unitOfWork.Profesores.GetProfesorConAsignaturas();
+        return Ok(profesores);
+    }
+
+    [HttpGet("PointVeintiSiete")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<DepartamentoProfesorDto>>> PointVeintiSiete()
+    {
+        var profesores = await _unitOfWork.Profesores.GetAllProfesoresNoVinculados();
+        return _mapper.Map<List<DepartamentoProfesorDto>>(profesores);
+    }
+    [HttpGet("PointVeintiNueve")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<BsProfesorDto>>> PointVeintiNueve()
+    {
+        var profesores = await _unitOfWork.Profesores.GetProfesoresDepartamentoSinAsig();
+        return _mapper.Map<List<BsProfesorDto>>(profesores);
+    }
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

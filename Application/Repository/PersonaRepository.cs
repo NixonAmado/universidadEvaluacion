@@ -70,10 +70,40 @@ public class PersonaRepository : GenericRepository<Persona>, IPersona
     {       
         return await _context.Personas
                             .Where(p => p.Matriculas.Any(m => m.Id_alumno == p.Id) &&
-                             p.Matriculas.Any(p => 
-                             p.CursoEscolar.Anio_inicio == 2018 &&
-                             p.CursoEscolar.Anio_fin == 2019 )).Distinct()
-                             .ToListAsync();
+                                p.Matriculas.Any(p => 
+                                p.CursoEscolar.Anio_inicio == 2018 &&
+                                p.CursoEscolar.Anio_fin == 2019 )).Distinct()
+                            .ToListAsync();
+    }
+//17.Devuelve el número total de **alumnas** que hay.
+    public async Task<Object> GetCantAlumnas()
+    {
+        int cantAlumnas = await _context.Personas
+            .Where(p => p.Tipo == Persona.Type.alumno && p.Sexo == Persona.Genero.M)
+            .CountAsync();
 
+        return new  
+        {
+            cantidadAlumnas = cantAlumnas
+        }; 
+    }
+//Calcula cuántos alumnos nacieron en `1999`.   
+    public async Task<Object> GetCantAlumnosEnFecha(int year)
+    {
+        int cantAlumnos = await _context.Personas
+                    .Where(p => p.Tipo == Persona.Type.alumno && p.Fecha_nacimiento.Year == year)
+                    .CountAsync();
+
+        return new  
+        {
+            AlumnosNacidosAño = cantAlumnos
+        }; 
+    }
+// 26. Devuelve todos los datos del alumno más joven.
+    public async Task<Persona> GetAlumnoMasJoven()
+    {
+        return await _context.Personas
+                    .OrderBy(p => p.Fecha_nacimiento)
+                    .FirstOrDefaultAsync();
     }
 }

@@ -27,7 +27,51 @@ public class DepartamentoController : ApiBaseController
         var Departamentos = await _unitOfWork.Departamentos.GetDepartamentosPorProfesores();
         return _mapper.Map<List<ProfesorDepartamentoDto>>(Departamentos);
     }
+    [HttpGet("PointDiezNueve")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>>PointDiezNueve()
+    {
+        var Departamentos = await _unitOfWork.Departamentos.GetCantProfesoresEnDepartamento();
+        return Ok(Departamentos);
+    }
 
+    [HttpGet("PointDiezSeis")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<BsDepartamentoDto>>>PointDiezSeis()
+    {
+        var Departamentos = await _unitOfWork.Departamentos.GetDepartamentoTieneAsignatura();
+        return _mapper.Map<List<BsDepartamentoDto>>(Departamentos);
+    }
+    
+
+    [HttpGet("PointVeinte")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<Object> PointVeinte()
+    {
+        var Departamento = await _unitOfWork.Departamentos.GetCantProfNoAsosiadosDepart();
+        return Ok(Departamento);
+    }
+    [HttpGet("PointVeintiOcho")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<BsDepartamentoDto>>> PointVeintiOcho()
+    {
+        var profesores = await _unitOfWork.Departamentos.GetDepartamentoSinProfesores();
+        return _mapper.Map<List<BsDepartamentoDto>>(profesores);
+    }
+    [HttpGet("PointTreintaUno")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult<IEnumerable<BsDepartamentoDto>>> GetTreintaUno()
+    {
+        var profesores = await _unitOfWork.Departamentos.GetDepartamentoSinAsigCS();
+        return _mapper.Map<List<BsDepartamentoDto>>(profesores);
+    }    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -20,6 +20,34 @@ public class GradoController : ApiBaseController
         _unitOfWork = unitOfWork;
     }
     
+    [HttpGet("PointVeintiUno")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> PointVeintiUno()
+    {
+        var Grados = await _unitOfWork.Grados.GetCantAsigNoAsosiadaPorGrado();
+        return Ok(Grados);
+    }
+
+    [HttpGet("PointVeintiDos/{cantidadMin}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> PointVeintiDos(int cantidadMin)
+    {
+        var Grados = await _unitOfWork.Grados.GetCantAsigPorcantidadEnGrado(cantidadMin);
+        return Ok(Grados);
+    }
+    
+    [HttpGet("PointVeintiTres")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> PointVeintiTres()
+    {
+        var Grados = await _unitOfWork.Grados.GetGradosSumCreditos();
+        return Ok(Grados);
+    }
+       
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

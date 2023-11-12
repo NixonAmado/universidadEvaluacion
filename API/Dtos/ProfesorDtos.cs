@@ -6,6 +6,7 @@ namespace API.Dtos
         public PointUno Persona {get;set;}
 
     }
+
     public class BsProfesorDto
     {
         public BsDepartamentoDto Departamento {get;set;}
@@ -14,5 +15,9 @@ namespace API.Dtos
 
     }
 
-
+    public class AsignaturasProfesorDto
+    {
+        public PointUnoConId Persona {get;set;}
+        public int CantidadAsignaturas {get;set;}
+    }
 }

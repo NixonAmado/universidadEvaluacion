@@ -10,7 +10,8 @@ namespace Domain.Interfaces;
         Task<IEnumerable<Persona>> GetAlumnasMatriculadas();
         Task<IEnumerable<AlumnoAsignatura>> GetAsignaturasPorAlumno(string nif);
         Task<IEnumerable<Persona>> GetAlumnosMatriculados();
-        
-        
+        Task<Object> GetCantAlumnas();
+        Task<Object> GetCantAlumnosEnFecha(int year);
+        Task<Persona> GetAlumnoMasJoven();
         
     }

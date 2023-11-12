@@ -8,4 +8,7 @@ namespace Domain.Interfaces;
         Task<IEnumerable<Profesor>> GetProfesoresDepartamento();
         Task<IEnumerable<Profesor>> GetAllProfesores();
         Task<IEnumerable<Profesor>> GetProfesoresNoAsignatura();
+        Task<IEnumerable<Object>> GetProfesorConAsignaturas();
+        Task<IEnumerable<Profesor>> GetAllProfesoresNoVinculados();
+        Task<IEnumerable<Profesor>> GetProfesoresDepartamentoSinAsig();
     }

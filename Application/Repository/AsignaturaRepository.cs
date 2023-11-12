@@ -33,4 +33,14 @@ public class AsignaturaRepository : GenericRepository<Asignatura>, IAsignatura
                             .Where(p =>  p.Id_profesor == null)
                             .ToListAsync();
     }
+
+    //30. Devuelve un listado con las asignaturas que no tienen un profesor asignado.
+    public async Task<IEnumerable<Asignatura>> GetAsignaturaSinProfesor()
+    {
+        return await _context.Asignaturas
+                            .Where(p => p.Id_profesor == null).ToListAsync();
+    }
+
+
+
 }
