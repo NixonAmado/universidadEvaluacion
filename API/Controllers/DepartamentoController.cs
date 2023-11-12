@@ -39,10 +39,10 @@ public class DepartamentoController : ApiBaseController
     [HttpGet("PointDiezSeis")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<BsDepartamentoDto>>>PointDiezSeis()
+    public async Task<ActionResult<IEnumerable<Object>>>PointDiezSeis()
     {
         var Departamentos = await _unitOfWork.Departamentos.GetDepartamentoTieneAsignatura();
-        return _mapper.Map<List<BsDepartamentoDto>>(Departamentos);
+        return Ok(Departamentos);
     }
     
 

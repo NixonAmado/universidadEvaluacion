@@ -6,7 +6,7 @@ namespace Domain.Interfaces;
     {
         Task<IEnumerable<Departamento>> GetDepartamentosPorProfesores();
         Task<IEnumerable<Object>> GetCantProfesoresEnDepartamento();
-        Task<IEnumerable<Departamento>> GetDepartamentoTieneAsignatura();
+        Task<IEnumerable<Object>> GetDepartamentoTieneAsignatura();
         Task<IEnumerable<Object>> GetCantProfNoAsosiadosDepart();
         Task<IEnumerable<Departamento>> GetDepartamentoSinProfesores();
         Task<IEnumerable<Departamento>> GetDepartamentoSinAsigCS();

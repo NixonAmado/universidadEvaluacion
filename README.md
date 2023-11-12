@@ -52,7 +52,7 @@
 
 5. Devuelve el listado de las asignaturas que se imparten en el primer cuatrimestre, en el tercer curso del grado que tiene el identificador `7`.
     ```
-    RUTA= /api/asignatura/PointCinco/1/2/7
+    RUTA= /api/asignatura/PointCinco/1/2/7  (todos los parametros son variables)
     ```
     LOGICA
     ```
@@ -207,12 +207,20 @@
     RTA= /api/Departamento/PointDiezSeis
     ```
      LOGICA
-     ```    return await _context.Departamentos
-                            .Include(p => p.Profesores)
-                            .ThenInclude(p => p.Asignaturas)
-                            .Where(p => p.Profesores.Any(p => p.Asignaturas.Any(p => p.Curso == null)))
+     ```    
+        public async Task<IEnumerable<Object>> GetDepartamentoTieneAsignatura()
+        {
+        return await _context.Departamentos
+                            .Where(p => p.Profesores.Any(p => !p.Asignaturas.Any(p=> p.Matriculas.Any())))
+                            .Select(p => new{
+                                Departamento = p.Nombre,
+                                AsignaturasNoCompartidas = p.Profesores.SelectMany(p => p.Asignaturas.Where(a => a.Matriculas.Any()))
+                                .Select(p => p.Nombre)
+                                .ToList()
+                            })
                             .ToListAsync();        
-    ```
+        }
+        ```
 
 17. Devuelve el número total de **alumnas** que hay.
     ```
@@ -436,7 +444,6 @@
     ```
     RTA= /api/Departamento/PointTreintaUno
     ```
-
         return await _context.Departamentos
-                            .Where(p => p.Profesores.Any(p => !p.Asignaturas.Any(p => p.Curso != null)))
+                            .Where(p => p.Profesores.Any(p => !p.Asignaturas.Any(p => p.Matriculas.Any())))
                             .ToListAsync();

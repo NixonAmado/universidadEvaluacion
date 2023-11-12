@@ -21,12 +21,16 @@ public class DepartamentoRepository : GenericRepository<Departamento>, IDepartam
                     .ToListAsync();
     }
     //16. Devuelve un listado con todos los departamentos que tienen alguna asignatura que no se haya impartido en ningún curso escolar. El resultado debe mostrar el nombre del departamento y el nombre de la asignatura que no se haya impartido nunca.
-    public async Task<IEnumerable<Departamento>> GetDepartamentoTieneAsignatura()
+    public async Task<IEnumerable<Object>> GetDepartamentoTieneAsignatura()
     {
         return await _context.Departamentos
-                            .Include(p => p.Profesores)
-                            .ThenInclude(p => p.Asignaturas)
-                            .Where(p => p.Profesores.Any(p => p.Asignaturas.Any(p => p.Curso == null)))
+                            .Where(p => p.Profesores.Any(p => !p.Asignaturas.Any(p=> p.Matriculas.Any())))
+                            .Select(p => new{
+                                Departamento = p.Nombre,
+                                AsignaturasNoCompartidas = p.Profesores.SelectMany(p => p.Asignaturas.Where(a => a.Matriculas.Any()))
+                                .Select(p => p.Nombre)
+                                .ToList()
+                            })
                             .ToListAsync();        
         }
 
@@ -64,7 +68,7 @@ public class DepartamentoRepository : GenericRepository<Departamento>, IDepartam
     public async Task<IEnumerable<Departamento>> GetDepartamentoSinAsigCS()
     {
         return await _context.Departamentos
-                            .Where(p => p.Profesores.Any(p => !p.Asignaturas.Any(p => p.Curso != null)))
+                            .Where(p => p.Profesores.Any(p => !p.Asignaturas.Any(p => p.Matriculas.Any())))
                             .ToListAsync();
     }
 
