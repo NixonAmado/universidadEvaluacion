@@ -1,3 +1,9 @@
+Especificaciones: Una universidad busca implementar una base de datos para gestionar la información de sus estudiantes, profesores, cursos y asignaturas. La base de datos se suministra con la información necesaria para facilitar el seguimiento de la asignación de profesores a cursos y asignaturas. La universidad proporciona los enunciados de las consultas específicas que se deben realizar en la base de datos, con el objetivo de obtener información relevante según sus necesidades, como la carga laboral de los profesores y otros aspectos cruciales para la gestión académica.
+
+**importante** = Para el volcado de datos de la tabla asignatura se necesita poner las columnas explicitamente, ya que, la tabla fue modificada ligeramente
+EJ: INSERT INTO asignatura **(id,nombre,creditos,tipo,curso,cuatrimestre,id_profesor,id_grado)** VALUES (1000, 'Álgegra lineal y matemática discreta', 6, 'básica', 1, 1, 3, 4);
+
+*CONSULTAS
 1. Devuelve un listado con el primer apellido, segundo apellido y el nombre de todos los alumnos. El listado deberá estar ordenado alfabéticamente de menor a mayor por el primer apellido, segundo apellido y nombre.
     ```    
     RUTA= api/Persona/GetPointUno
